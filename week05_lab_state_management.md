@@ -779,11 +779,20 @@ class HomePage extends ConsumerWidget {
 **ข้อกำหนด**
 
 - ต้องใช้ `context.read` หรือ `context.watch` ให้ถูกต้องตามหลักการ และอธิบายเหตุผลการเลือก ในช่องด้านล่าง
-  ```text
+```text
+1. ใช้ context.watch<FavoritesModel>() ในส่วนของการสร้าง UI ( build method ): 
+เพื่ออ่านค่า favorites.items.isNotEmpty สำหรับตรวจสอบเงื่อนไขในการแสดงปุ่มล้างรายการโปรด (แสดงเฉพาะเมื่อมีสินค้าอย่างน้อย 1 รายการ) และทำให้ Widget คอยฟังการเปลี่ยนแปลงเพื่อ Rebuild หน้าจออัปเดตแบบ Real-time เมื่อรายการโปรดเปลี่ยนไป
 
-
-  ```
+2. ใช้ context.read<FavoritesModel>() ภายใน event handler ( onPressed ของปุ่มยืนยันใน AlertDialog ): 
+เพื่อเรียกใช้งานเมธอด clear() สั่งล้างข้อมูลทั้งหมดเมื่อผู้ใช้กดปุ่มยืนยัน เนื่องจากเป็นการส่งคำสั่งเพียงครั้งเดียวตอบสนองต่อ Event ไม่ได้เป็นการอ่านค่ามาสร้าง UI และไม่ต้องการฟังการเปลี่ยนแปลงเพื่อ Rebuild ใน callback นั้น
+```
 - ปุ่มต้องแสดงเฉพาะเมื่อมีรายการโปรดอย่างน้อย 1 รายการเท่านั้น (ถ้ารายการว่างอยู่แล้วไม่ต้องแสดงปุ่มนี้)
+**บันทึกผลการทดลอง**
+1. กดปุ่มล้างรายการโปรดทั้งหมด
+<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/a62c44dd-bbb9-4f17-91a1-59a2398a79e5" />
+2. เมื่อกดล้างทั้งหมดเเล้ว
+<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/3ce85dba-110e-445e-bc43-faa04ce4be20" />
+
 
 ### โจทย์ที่ 3 (ท้าทายเพิ่ม ไม่บังคับ)
 
