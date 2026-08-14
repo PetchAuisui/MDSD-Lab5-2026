@@ -239,12 +239,15 @@ class MyApp extends StatelessWidget {
 ```
 
 > ✅ **Checkpoint 1.1** รันแอปและกดปุ่ม "🤍 บันทึกเป็นรายการโปรด" ที่สินค้าชิ้นใดก็ได้ ทดสอบว่า (ก) ตัวเลขในไอคอนหัวใจที่ AppBar เพิ่มขึ้นถูกต้อง และ (ข) ปุ่มของสินค้าที่กดไปแล้วเปลี่ยนเป็น "❤️ บันทึกแล้ว" และกดซ้ำไม่ได้ ถ่ายภาพหน้าจอที่เห็นทั้งสองอย่างนี้พร้อมกัน แล้วเปิดไฟล์ `item_card.dart` และ `item_list_section.dart` ให้เห็น constructor ที่ต้องรับพารามิเตอร์ส่งต่อ (Prop Drilling) ชัดเจน แนบส่งในรายงาน
+#### บันทีกผลการทดลอง
+<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/9b3ee6bc-2bb1-4e79-a551-68adf87b154b" />
+
 
 **คำถาม**: ถ้าต้องเพิ่มหน้าจอ `FavoritesPage` ที่ต้องแสดงรายการที่บันทึกไว้ชุดเดียวกัน แต่ถูก push แยกออกไปเป็นอีก Route หนึ่ง จะเกิดปัญหาอะไรกับโค้ดแบบ Prop Drilling นี้ จงเขียนคำตอบสั้น ๆ 
+- 1.State ถูกกักขัง (Tightly Coupled): State ของ `_savedItems` อยู่ภายใน `_HomePageState` ทำให้เมื่อเปิดหน้าใหม่ (`Navigator.push`) ซึ่งอยู่นอก Widget Tree ของ `HomePage` จะไม่สามารถเข้าถึงข้อมูลได้โดยตรง
+- 2.ต้องส่งต่อผ่าน Navigator Parameter: จำเป็นต้องส่ง List และ Callback ฟังก์ชันข้าม Route ผ่าน constructor ของ `FavoritesPage`
+- 3.ข้อมูลไม่ซิงค์กัน (Sync Issue): หากหน้า `FavoritesPage` มีการลบหรือแก้ไขรายการ ข้อมูลจะไม่ซิงค์กลับมาอัปเดตหน้า `HomePage` แบบ Reactive (ต้องคอยดัก `await Navigator.push` หรือส่ง Callback ย้อนกลับ ซึ่งจัดการยากและโค้ดซับซ้อน)
 
-```text
-
-```
 
 ---
 
