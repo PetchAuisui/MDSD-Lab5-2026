@@ -239,8 +239,8 @@ class MyApp extends StatelessWidget {
 ```
 
 > ✅ **Checkpoint 1.1** รันแอปและกดปุ่ม "🤍 บันทึกเป็นรายการโปรด" ที่สินค้าชิ้นใดก็ได้ ทดสอบว่า (ก) ตัวเลขในไอคอนหัวใจที่ AppBar เพิ่มขึ้นถูกต้อง และ (ข) ปุ่มของสินค้าที่กดไปแล้วเปลี่ยนเป็น "❤️ บันทึกแล้ว" และกดซ้ำไม่ได้ ถ่ายภาพหน้าจอที่เห็นทั้งสองอย่างนี้พร้อมกัน แล้วเปิดไฟล์ `item_card.dart` และ `item_list_section.dart` ให้เห็น constructor ที่ต้องรับพารามิเตอร์ส่งต่อ (Prop Drilling) ชัดเจน แนบส่งในรายงาน
-#### บันทีกผลการทดลอง
-<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/9b3ee6bc-2bb1-4e79-a551-68adf87b154b" />
+>#### บันทีกผลการทดลอง
+><img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/9b3ee6bc-2bb1-4e79-a551-68adf87b154b" />
 
 
 **คำถาม**: ถ้าต้องเพิ่มหน้าจอ `FavoritesPage` ที่ต้องแสดงรายการที่บันทึกไว้ชุดเดียวกัน แต่ถูก push แยกออกไปเป็นอีก Route หนึ่ง จะเกิดปัญหาอะไรกับโค้ดแบบ Prop Drilling นี้ จงเขียนคำตอบสั้น ๆ 
@@ -500,18 +500,17 @@ class HomePage extends StatelessWidget {
 ```
 
 > ✅ **Checkpoint 2.1** รันแอปใหม่ ทดสอบกดบันทึกสินค้าจากหลายจุด แล้วตรวจว่าตัวเลขที่ AppBar อัปเดตถูกต้องทุกครั้ง โดยที่ไฟล์ `item_list_section.dart` และ `item_card.dart` **ไม่มีพารามิเตอร์ savedItems หรือ onSave หลงเหลือใน constructor แล้ว**
-<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/530e7ae9-795f-4480-abd3-cf0596de11e2" />
-
-
+><img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/530e7ae9-795f-4480-abd3-cf0596de11e2" />
+>
 > ✅ **Checkpoint 2.2** ทดสอบว่าเมื่อบันทึกสินค้าจากหน้า Home แล้วกดไปหน้า Favorites ตัวเลขและรายการสินค้าตรงกันทันที ลองกดปุ่มถังขยะลบสินค้าออกจากหน้า Favorites แล้วย้อนกลับไปหน้า Home ดูว่าปุ่มของสินค้านั้นกลับมากดซ้ำได้อีกครั้ง ถ่ายภาพหน้าจอทั้งสองหน้าเทียบกันแนบส่ง
 > 1.หน้า Favorites
-<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/5134386a-0642-415d-9616-e6877f8ef668" />
-
+><img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/5134386a-0642-415d-9616-e6877f8ef668" />
+>
 >2.กดปุ่มถังขยะลบสินค้าออกจากหน้า Favorites
-<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/cdf81880-4c11-459d-8dfc-7beef4b04561" />
-
+><img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/cdf81880-4c11-459d-8dfc-7beef4b04561" />
+>
 >3.กลับไปหน้า Home
-<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/491df110-1a0d-4d37-a883-4fcf787e196f" />
+><img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/491df110-1a0d-4d37-a883-4fcf787e196f" />
 
 ---
 
@@ -549,9 +548,9 @@ class HomePage extends StatelessWidget {
 >เหตุผล:
 >เป็น Ephemeral / Local UI State ที่เกิดขึ้นและจบลงภายในปุ่มหรือ Widget นั้นตัวเดียว ไม่เกี่ยวข้องกับ Data/Business Logic หรือหน้าจออื่น
 >การใช้ setState หรือ AnimationController ภายใน StatefulWidget เป็นแนวทางมาตรฐานที่เรียบง่ายที่สุด ไม่ทำให้โครงสร้างโค้ดซับซ้อนเกินความจำเป็น (Avoid Over-engineering)
-
+>
 >**📊 ตารางสรุปภาพรวม**
-
+>
 >| ฟีเจอร์ |	ขอบเขตของ State (Scope)	| เครื่องมือที่เหมาะสม |
 >|---|---|---|
 >|1. Dark / Light Mode |	Global (ทั้งแอป) |	Riverpod / Provider|
@@ -735,8 +734,19 @@ class HomePage extends ConsumerWidget {
 ```
 
 > ✅ **Checkpoint 4.1** รันแอปด้วย `flutter run` (หรือกด F5 ใน VS Code) แล้วทดสอบกดปุ่ม "บันทึก" ที่สินค้าชิ้นใดก็ได้ ตรวจว่าตัวเลข ❤️ ที่ AppBar เพิ่มขึ้นถูกต้อง ถ่ายภาพหน้าจอแนบส่ง
-
+> บันทึกผลการทดลอง
+><img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/8a763d32-42b6-4772-8099-d705a03489e4" />
+>
 > ✅ **Checkpoint 4.2** เขียนตารางเปรียบเทียบสั้น ๆ ว่าตอนแปลงจาก Provider เป็น Riverpod ต้องเปลี่ยนอะไรบ้าง (เช่น `ChangeNotifier` → `StateNotifier`, `StatelessWidget` → `ConsumerWidget`, `context.watch` → `ref.watch`) อย่างน้อย 4 คู่เทียบ
+>| Provider | Riverpod |
+>|---|---|
+>| `ChangeNotifier` | `StateNotifier` |
+>| `ChangeNotifierProvider` | `StateNotifierProvider` |
+>| `StatelessWidget` | `ConsumerWidget` |
+>| `context.watch<FavoritesModel>()` | `ref.watch(favoritesProvider)` |
+>| `context.read<FavoritesModel>()` | `ref.read(favoritesProvider.notifier)` |
+>| `notifyListeners()` | กำหนดค่าใหม่ให้ `state` เช่น `state = [...state, item]` |
+>| ลงทะเบียน Provider ที่ `main.dart` ด้วย `ChangeNotifierProvider` | ใช้ `ProviderScope` ครอบแอป และประกาศ Provider แยกเป็นตัวแปร |
 
 ---
 
