@@ -500,12 +500,18 @@ class HomePage extends StatelessWidget {
 ```
 
 > ✅ **Checkpoint 2.1** รันแอปใหม่ ทดสอบกดบันทึกสินค้าจากหลายจุด แล้วตรวจว่าตัวเลขที่ AppBar อัปเดตถูกต้องทุกครั้ง โดยที่ไฟล์ `item_list_section.dart` และ `item_card.dart` **ไม่มีพารามิเตอร์ savedItems หรือ onSave หลงเหลือใน constructor แล้ว**
+<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/530e7ae9-795f-4480-abd3-cf0596de11e2" />
+
 
 > ✅ **Checkpoint 2.2** ทดสอบว่าเมื่อบันทึกสินค้าจากหน้า Home แล้วกดไปหน้า Favorites ตัวเลขและรายการสินค้าตรงกันทันที ลองกดปุ่มถังขยะลบสินค้าออกจากหน้า Favorites แล้วย้อนกลับไปหน้า Home ดูว่าปุ่มของสินค้านั้นกลับมากดซ้ำได้อีกครั้ง ถ่ายภาพหน้าจอทั้งสองหน้าเทียบกันแนบส่ง
+> 1.หน้า Favorites
+<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/5134386a-0642-415d-9616-e6877f8ef668" />
 
-```image
+>2.กดปุ่มถังขยะลบสินค้าออกจากหน้า Favorites
+<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/cdf81880-4c11-459d-8dfc-7beef4b04561" />
 
-```
+>3.กลับไปหน้า Home
+<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/491df110-1a0d-4d37-a883-4fcf787e196f" />
 
 ---
 
