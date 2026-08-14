@@ -800,7 +800,28 @@ class HomePage extends ConsumerWidget {
 ทำโจทย์ที่ 1 และ 2 ซ้ำอีกครั้งในโปรเจกต์ทดลอง Riverpod (ส่วนที่ 4) 
 
 > ✅ **Checkpoint 5.1** ถ่ายภาพหน้าจอฟีเจอร์ค้นหาที่กรองสินค้าได้ถูกต้อง และภาพ Dialog ยืนยันการล้างรายการโปรด เขียนอธิบายเหตุผลการเลือกชนิด State ของทั้งสองฟีเจอร์ ในช่องด้านล่าง
-```text
+**บันทึกผลการทดลอง**
+<img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/f89055cf-c626-410e-a963-79a3d719cdd3" />
 
+**อธิบาย**
+```text
+1. ฟีเจอร์ที่ 1: ช่องค้นหาสินค้า (Search Box)
+- ชนิด State ที่เลือก: Ephemeral State (Local State)
+- เหตุผล: ค่าคำค้นหาสินค้า (Search Query) เป็นสถานะชั่วคราวที่มีขอบเขตการใช้งานจำกัดเฉพาะในหน้า Home (HomePage) เท่านั้น เพื่อกรองรายการสินค้าที่แสดงผลบนหน้าจอ ข้อมูลคำค้นหานี้ไม่มีความจำเป็นต้องส่งต่อ ใช้งานร่วมกับหน้าอื่น (เช่น หน้า FavoritesPage) หรือบันทึกคงไว้เมื่อย้ายหน้า ดังนั้น การเลือกใช้ Ephemeral State ร่วมกับ setState() ใน StatefulWidget (หรือ ConsumerStatefulWidget) จึงเป็นเครื่องมือที่เรียบง่าย เบาที่สุด มีประสิทธิภาพสูงสุด และเพียงพอต่อการใช้งาน โดยไม่เพิ่มความซับซ้อนที่ไม่จำเป็นให้กับ App State (Provider / Riverpod)
+
+2. ฟีเจอร์ที่ 2: ปุ่ม "ล้างรายการโปรดทั้งหมด" (Clear All Favorites)
+- ชนิด State ที่เลือก: App State (Global / Shared State)
+- เหตุผล: รายการสินค้าโปรด (Favorites List) เป็นข้อมูลหลักของแอปพลิเคชันที่มีการเข้าถึงและใช้งานร่วมกันจากหลายหน้าจอ เช่น หน้า Home ต้องการอ่านจำนวนรายการเพื่อแสดง Badge บน AppBar และอัปเดตสถานะปุ่มบันทึก ในขณะที่หน้า FavoritesPage ต้องการอ่านรายการสินค้า มูลค่ารวม และมีปุ่มสั่งล้างรายการโปรด การเปลี่ยนแปลงข้อมูล (การเพิ่ม ลบ หรือกดล้างทั้งหมด) จึงต้องส่งผลให้ UI ทุกส่วนที่เกี่ยวข้องอัปเดตแบบ Real-time การจัดการข้อมูลนี้จึงต้องใช้ App State ผ่าน FavoritesModel (Provider) หรือ FavoritesNotifier (Riverpod)
+
+การเลือกใช้ context.watch / context.read (หรือ ref.watch / ref.read):
+1) ใช้ context.watch / ref.watch ใน build() method: เพื่ออ่านค่า favorites.isNotEmpty ในการตรวจสอบเงื่อนไขแสดง/ซ่อนปุ่ม "ล้างรายการโปรดทั้งหมด" (แสดงเฉพาะเมื่อมีสินค้าอย่างน้อย 1 รายการ) และคอยฟังการเปลี่ยนแปลงเพื่อ Rebuild UI แบบ Real-time เมื่อรายการเปลี่ยนไป
+2) ใช้ context.read / ref.read ภายใน onPressed callback ของปุ่มยืนยันใน AlertDialog: เพื่อเรียกใช้เมธอด clear() สั่งล้างข้อมูลทั้งหมดเมื่อผู้ใช้กดปุ่มยืนยัน เนื่องจากเป็นการส่งคำสั่งแก้ไขข้อมูลเพียงครั้งเดียวตอบสนองต่อ Event ไม่ใช่การอ่านค่ามาสร้าง UI และไม่ต้องการฟังการเปลี่ยนแปลงเพื่อ Rebuild ใน callback นั้น
 
 ```
+---
+## Repository ของงาน (GitHub)
+### campus_marketplace
+> https://github.com/PetchAuisui/campus_marketplace.git
+
+### campus_marketplace_riverpod_trial (ส่วนที่ 4)
+> https://github.com/PetchAuisui/campus_marketplace_riverpod_trial.git
